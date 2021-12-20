@@ -1,0 +1,29 @@
+<template>
+    <template if:true={showSpinner}>
+        <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+    </template>    
+    <lightning-card title={state.title} icon-name={state.icon}>
+        <template if:true={isNextWork}>
+            <lightning-layout multiple-rows="true">
+                <lightning-layout-item padding="around-large" class="inlinemiddle pointer" flexibility="auto">
+                    <lightning-button 
+                        label="Get Next Work" 
+                        title="Get Next Work" 
+                        icon-name="utility:open" 
+                        onclick={handleClick}
+                    >
+                    </lightning-button>
+                </lightning-layout-item>
+            </lightning-layout>
+        </template>
+        <template if:false={isNextWork}>
+            <c-case-container 
+                onworkoblectclosed={handleWorkObjectClosed}
+                onchangetitle={handleChangeTitle}
+                assignment-id={state.assignmentId}
+                case-id={state.caseId}
+                url={url}
+            ></c-case-container>
+        </template>
+    </lightning-card>
+</template>

@@ -1,0 +1,18 @@
+<template>
+  <template if:true={isVisible}>
+    <lightning-layout-item>
+      <lightning-combobox
+        label={label}
+        value={fieldObject.value}
+        data-reference={fieldObject.reference}
+        field-level-help={tooltip}
+        disabled={disabled}
+        readonly={readonly}
+        required={required}
+        options={dropdownOptions}
+        onchange={handleChange}
+      >
+      </lightning-combobox>
+    </lightning-layout-item>
+  </template>
+</template>

@@ -1,0 +1,33 @@
+<template>
+  <lightning-layout-item class="slds-clearfix">
+    <div class="slds-p-bottom_xx-small slds-p-top_xx-small">
+      <template if:true={disabled}>
+        <label class="slds-form-element__label">{label}</label>
+        <div class="slds-form-element__control">
+          <lightning-formatted-url
+            value={formattedValue}
+            tooltip={tooltip}
+            target="_blank"
+          >
+          </lightning-formatted-url>
+        </div>
+      </template>
+      <template if:false={disabled}>
+        <template if:true={fieldLabel}>
+          <label class="slds-form-element__label">{fieldLabel}</label>
+        </template>
+        <div>
+          <a
+            href={href}
+            tooltip={tooltip}
+            target="_blank"
+            style={linkStyle}
+            data-reference={fieldObject.reference}
+            onclick={handleClick}
+            >{label}</a
+          >
+        </div>
+      </template>
+    </div>
+  </lightning-layout-item>
+</template>

@@ -1,0 +1,16 @@
+.selectoptions {
+  border: solid 1px #ecebea;
+  border-radius: 4px;  
+  margin-top: -12px; 
+  box-shadow: 2px 2px 2px #ecebea;
+}
+
+.optionitem {
+   position: relative;  
+   display: block;  
+   padding: 6px;  
+}
+
+.optionitem:hover {
+  background-color: #ecebea;
+}

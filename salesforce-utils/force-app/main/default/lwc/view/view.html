@@ -1,0 +1,17 @@
+<template>
+  <template if:true={isVisible}>
+    <template for:each={viewObject.groups} for:index="index" for:item="group">
+      <c-group
+        key={key}
+        group-object={group}
+        register-component={registerComponent}
+        case-data={caseData}
+        field-changed-handler={fieldChangedHandler}
+        field-clicked-handler={fieldClickedHandler}
+        field-blured-handler={fieldBluredHandler}
+        get-work-object={getWorkObject}
+        url={url}
+      ></c-group>
+    </template>
+  </template>
+</template>

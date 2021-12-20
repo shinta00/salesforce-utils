@@ -1,0 +1,29 @@
+<template>
+    <lightning-layout-item>
+        <lightning-input 
+            class="slds-m-bottom_small" 
+            label={label}
+            type="search"
+            value={selectedOption}
+            minlength="1" 
+            onkeyup={handleSearchTermChange}
+            onclick={handleClearSearch}
+        >
+        </lightning-input>
+    </lightning-layout-item>
+    <template if:true={showOptions}>  
+        <div class="selectoptions">  
+            <template for:each={autocompleteOptions} for:item="option">  
+                <lightning-layout key={option.value} class="optionitem" data-option={option.value}  onclick={handleSelectOption} vertical-align="center">  
+                    <lightning-layout-item 
+                        class="slds-p-left_large" 
+                        padding="around-x-small"
+                        style="cursor:pointer"
+                    >
+                    {option.label}  
+                    </lightning-layout-item>  
+                </lightning-layout>  
+            </template>
+        </div>
+    </template>
+</template>

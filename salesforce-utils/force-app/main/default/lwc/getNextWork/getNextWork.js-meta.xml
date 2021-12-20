@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata" fqn="PegaLWC">
+    <apiVersion>45.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Get Next Work</masterLabel>
+    <description>Get next Pega assignment</description>
+    <targets>
+        <target>lightning__AppPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>   
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__AppPage, lightning__HomePage, lightning__RecordPage, lightningCommunity__Default">
+            <property name="url" label="DX-API endpoint" description="Pega DX-API endpoint" placeholder="Enter Pega DX-API endpoint" type="String" required="true" default="https://pega-server/prweb/api/v1/"/>
+            <property name="title" label="Title" placeholder="Enter component title" type="String" required="false" default="Get Next Work"/>        
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

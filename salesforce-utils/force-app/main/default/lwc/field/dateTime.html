@@ -1,0 +1,18 @@
+<template>
+  <template if:true={isVisible}>
+    <lightning-layout-item>
+      <lightning-input
+        label={label}
+        type={formatReadWritetType}
+        disabled={disabled}
+        readonly={readonly}
+        required={required}
+        value={fieldObject.value}
+        data-reference={fieldObject.reference}
+        field-level-help={tooltip}
+        onchange={handleChange}
+      >
+      </lightning-input>
+    </lightning-layout-item>
+  </template>
+</template>

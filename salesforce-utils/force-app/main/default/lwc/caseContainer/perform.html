@@ -1,0 +1,123 @@
+<template>
+  <c-modal-dialog></c-modal-dialog>
+  <template if:true={showSpinner}>
+    <lightning-spinner
+      alternative-text="Loading"
+      size="large"
+    ></lightning-spinner>
+  </template>
+  <div class="c-container">
+    <lightning-layout multiple-rows="true">
+      <lightning-layout-item flexibility="auto" padding="around-small" size="8">
+        <div class="slds-left_right slds-p-left_medium">
+          <lightning-progress-indicator
+            current-step={currentStage}
+            type="path"
+            variant="base"
+          >
+            <template for:each={stages} for:item="stage">
+              <lightning-progress-step
+                onclick={ignoreStepClick}
+                label={stage.label}
+                value={stage.value}
+                key={stage.value}
+              ></lightning-progress-step>
+            </template>
+          </lightning-progress-indicator>
+        </div>
+      </lightning-layout-item>
+      <template if:false={confirmHarnessMode}>
+        <lightning-layout-item padding="around-small" size="4">
+          <div class="slds-float_right slds-p-right_medium">
+            <lightning-button-menu label="Actions " alternative-text="Actions">
+              <template for:each={actions} for:item="action">
+                <lightning-menu-item
+                  key={key}
+                  label={action.label}
+                  value={action.value}
+                  onclick={handleCaseActions}
+                >
+                </lightning-menu-item>
+              </template>
+            </lightning-button-menu>
+          </div>
+        </lightning-layout-item>
+      </template>
+      <template if:true={hasErrors}>
+        <lightning-layout-item padding="around-small" size="12">
+          <div
+            class="page-section page-header slds-p-left_medium slds-p-right_medium"
+          >
+            <div>
+              <lightning-tile
+                onclick={handleErrors}
+                class="slds-theme_error slds-p-around_medium"
+              >
+                <p class="slds-truncate">Review the errors on this page.</p>
+              </lightning-tile>
+            </div>
+            <ul class="errorsList">
+              <template for:each={validationErrors} for:item="error">
+                <li
+                  class="slds-p-left_small slds-p-top_x-small"
+                  style="color: rgb(194, 57, 52);"
+                  key={error.Path}
+                >
+                  {error.Path}: {error.ValidationMessage}
+                </li>
+              </template>
+            </ul>
+          </div>
+        </lightning-layout-item>
+      </template>
+      <lightning-layout-item padding="around-small" size="12">
+        <lightning-layout
+          multiple-rows="true"
+          class="slds-clearfix slds-m-left_medium slds-m-right_medium"
+        >
+          <lightning-layout-item size="12">
+            <c-view
+              field-changed-handler={handleFieldChanged}
+              field-clicked-handler={handleFieldClicked}
+              field-blured-handler={handleFieldBlured}
+              register-component={registerComponent}
+              case-data={caseData}
+              get-work-object={getWorkObject}
+              onlistactionevent={handleGridAction}
+              url={url}
+            ></c-view>
+          </lightning-layout-item>
+        </lightning-layout>
+      </lightning-layout-item>
+      <template if:false={hideButtonsArea}>
+        <lightning-layout-item
+          class="slds-clearfix"
+          padding="around-small"
+          size="12"
+        >
+          <div class="slds-float_left">
+            <lightning-button
+              label="Cancel"
+              variant="destructive"
+              onclick={handleCancel}
+              class="slds-m-left_medium"
+            ></lightning-button>
+          </div>
+          <div class="slds-float_right">
+            <lightning-button
+              label="Save"
+              onclick={handleSave}
+              class="slds-m-right_x-small"
+            ></lightning-button>
+            <lightning-button
+              label="Submit"
+              variant="brand"
+              onclick={handleSubmit}
+              class="slds-m-right_medium"
+            ></lightning-button>
+          </div>
+        </lightning-layout-item>
+      </template>
+    </lightning-layout>
+  </div>
+</template>

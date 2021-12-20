@@ -1,0 +1,307 @@
+<template>
+  <template if:true={layoutObject.title}>
+    <lightning-layout-item padding="around-small">
+      <div>
+        <h3
+          class="slds-section__title slds-theme--shade slds-p-right_small slds-p-left_small"
+        >
+          {title}
+        </h3>
+      </div>
+    </lightning-layout-item>
+  </template>
+
+  <template if:true={isStacked}>
+    <template for:each={layoutObject.groups} for:index="index" for:item="group">
+      <c-group
+        key={key}
+        group-object={group}
+        register-component={registerComponent}
+        case-data={caseData}
+        field-changed-handler={fieldChangedHandler}
+        field-clicked-handler={fieldClickedHandler}
+        field-blured-handler={fieldBluredHandler}
+        get-work-object={getWorkObject}
+        url={url}
+      ></c-group>
+    </template>
+  </template>
+
+  <template if:true={isDynamic}>
+    <template for:each={layoutObject.rows} for:item="row">
+      <lightning-layout multiple-rows="true" key={key}>
+        <template for:each={row.groups} for:index="index" for:item="group">
+          <lightning-layout-item size="12" key={key}>
+            <c-group
+              group-object={group}
+              register-component={registerComponent}
+              case-data={caseData}
+              field-changed-handler={fieldChangedHandler}
+              field-clicked-handler={fieldClickedHandler}
+              field-blured-handler={fieldBluredHandler}
+              get-work-object={getWorkObject}
+              url={url}
+            ></c-group>
+          </lightning-layout-item>
+        </template>
+      </lightning-layout>
+    </template>
+  </template>
+
+  <template if:true={isGrid}>
+    <lightning-layout multiple-rows="true">
+      <lightning-layout-item class="slds-clearfix" size="12">
+        <div class="slds-scrollable_y" >
+          <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+            <thead>
+              <tr class="slds-line-height_reset">
+                <template
+                  for:each={layoutObject.header.groups}
+                  for:index="index"
+                  for:item="group"
+                >
+                  <th class="" scope="col" key={key}>
+                    <div class="slds-truncate">
+                      <c-group
+                        group-object={group}
+                        register-component={registerComponent}
+                        case-data={caseData}
+                        field-changed-handler={fieldChangedHandler}
+                        field-clicked-handler={fieldClickedHandler}
+                        field-blured-handler={fieldBluredHandler}
+                        get-work-object={getWorkObject}
+                        url={url}
+                      ></c-group>
+                    </div>
+                  </th>
+                </template>
+              </tr>
+            </thead>
+            <tbody>
+              <template for:each={layoutObject.rows} for:item="row">
+                <tr key={key}>
+                  <template
+                    for:each={row.groups}
+                    for:index="index"
+                    for:item="group"
+                  >
+                    <td key={key}>
+                      <c-group
+                        group-object={group}
+                        register-component={registerComponent}
+                        case-data={caseData}
+                        field-changed-handler={fieldChangedHandler}
+                        field-clicked-handler={fieldClickedHandler}
+                        field-blured-handler={fieldBluredHandler}
+                        get-work-object={getWorkObject}
+                        url={url}
+                      ></c-group>
+                    </td>
+                  </template>
+                </tr>
+              </template>
+            </tbody>
+          </table>
+        </div>
+      </lightning-layout-item>
+      <lightning-layout-item class="slds-clearfix" size="12">
+        <div class="slds-float_right slds-p-top_small">
+          <lightning-button
+            data-action="delete"
+            label="Delete"
+            variant="destructive"
+            icon-name="utility:dash"
+            onclick={fireGridActionEvent}
+            class="slds-m-right_x-small"
+          ></lightning-button>
+          <lightning-button
+            data-action="add"
+            label="Add"
+            variant="brand"
+            icon-name="utility:add"
+            onclick={fireGridActionEvent}
+            class="slds-m-right_medium"
+          ></lightning-button>
+        </div>
+      </lightning-layout-item>
+    </lightning-layout>
+  </template>
+
+  <template if:true={isInlineMiddle}>
+    <template for:each={layoutObject.groups} for:index="index" for:item="group">
+      <lightning-layout key={key}>
+        <lightning-layout-item class="inlinemiddle" flexibility="auto">
+          <c-group
+            group-object={group}
+            register-component={registerComponent}
+            case-data={caseData}
+            field-changed-handler={fieldChangedHandler}
+            field-clicked-handler={fieldClickedHandler}
+            field-blured-handler={fieldBluredHandler}
+            get-work-object={getWorkObject}
+            url={url}
+          ></c-group>
+        </lightning-layout-item>
+      </lightning-layout>
+    </template>
+  </template>
+
+  <template if:true={isDouble}>
+    <lightning-layout>
+      <lightning-layout-item flexibility="auto">
+        <div class="slds-p-right_x-small">
+          <c-group
+            group-object={group0}
+            register-component={registerComponent}
+            case-data={caseData}
+            field-changed-handler={fieldChangedHandler}
+            field-clicked-handler={fieldClickedHandler}
+            field-blured-handler={fieldBluredHandler}
+            get-work-object={getWorkObject}
+            url={url}
+          ></c-group>
+        </div>
+      </lightning-layout-item>
+      <lightning-layout-item flexibility="auto">
+        <div class="slds-p-left_x-small">
+          <c-group
+            group-object={group1}
+            register-component={registerComponent}
+            case-data={caseData}
+            field-changed-handler={fieldChangedHandler}
+            field-clicked-handler={fieldClickedHandler}
+            field-blured-handler={fieldBluredHandler}
+            get-work-object={getWorkObject}
+            url={url}
+          ></c-group>
+        </div>
+      </lightning-layout-item>
+    </lightning-layout>
+  </template>
+
+  <template if:true={is7030}>
+    <lightning-layout>
+      <lightning-layout-item size="8">
+        <div class="slds-p-right_x-small">
+          <c-group
+            group-object={group0}
+            register-component={registerComponent}
+            case-data={caseData}
+            field-changed-handler={fieldChangedHandler}
+            field-clicked-handler={fieldClickedHandler}
+            field-blured-handler={fieldBluredHandler}
+            get-work-object={getWorkObject}
+            url={url}
+          ></c-group>
+        </div>
+      </lightning-layout-item>
+      <lightning-layout-item size="4">
+        <div class="slds-p-left_x-small">
+          <c-group
+            group-object={group1}
+            register-component={registerComponent}
+            case-data={caseData}
+            field-changed-handler={fieldChangedHandler}
+            field-clicked-handler={fieldClickedHandler}
+            field-blured-handler={fieldBluredHandler}
+            get-work-object={getWorkObject}
+            url={url}
+          ></c-group>
+        </div>
+      </lightning-layout-item>
+    </lightning-layout>
+  </template>
+
+  <template if:true={is3070}>
+    <lightning-layout>
+      <lightning-layout-item size="4">
+        <div class="slds-p-right_x-small">
+          <c-group
+            group-object={group0}
+            register-component={registerComponent}
+            case-data={caseData}
+            field-changed-handler={fieldChangedHandler}
+            field-clicked-handler={fieldClickedHandler}
+            field-blured-handler={fieldBluredHandler}
+            get-work-object={getWorkObject}
+            url={url}
+          ></c-group>
+        </div>
+      </lightning-layout-item>
+      <lightning-layout-item size="8">
+        <div class="slds-p-left_x-small">
+          <c-group
+            group-object={group1}
+            register-component={registerComponent}
+            case-data={caseData}
+            field-changed-handler={fieldChangedHandler}
+            field-clicked-handler={fieldClickedHandler}
+            field-blured-handler={fieldBluredHandler}
+            get-work-object={getWorkObject}
+            url={url}
+          ></c-group>
+        </div>
+      </lightning-layout-item>
+    </lightning-layout>
+  </template>
+
+  <template if:true={isTriple}>
+    <lightning-layout>
+      <lightning-layout-item flexibility="auto">
+        <div class="slds-p-right_x-small">
+          <c-group
+            group-object={group0}
+            register-component={registerComponent}
+            case-data={caseData}
+            field-changed-handler={fieldChangedHandler}
+            field-clicked-handler={fieldClickedHandler}
+            field-blured-handler={fieldBluredHandler}
+            get-work-object={getWorkObject}
+            url={url}
+          ></c-group>
+        </div>
+      </lightning-layout-item>
+      <lightning-layout-item flexibility="auto">
+        <div class="slds-p-right_x-small slds-p-left_x-small">
+          <c-group
+            group-object={group1}
+            register-component={registerComponent}
+            case-data={caseData}
+            field-changed-handler={fieldChangedHandler}
+            field-clicked-handler={fieldClickedHandler}
+            field-blured-handler={fieldBluredHandler}
+            get-work-object={getWorkObject}
+            url={url}
+          ></c-group>
+        </div>
+      </lightning-layout-item>
+      <lightning-layout-item flexibility="auto">
+        <div class="slds-p-left_x-small">
+          <c-group
+            group-object={group2}
+            register-component={registerComponent}
+            case-data={caseData}
+            field-changed-handler={fieldChangedHandler}
+            field-clicked-handler={fieldClickedHandler}
+            field-blured-handler={fieldBluredHandler}
+            get-work-object={getWorkObject}
+            url={url}
+          ></c-group>
+        </div>
+      </lightning-layout-item>
+    </lightning-layout>
+  </template>
+
+  <template if:true={layoutObject.view}>
+    <c-view
+      view-object={layoutObject.view}
+      register-component={registerComponent}
+      case-data={caseData}
+      field-changed-handler={fieldChangedHandler}
+      field-clicked-handler={fieldClickedHandler}
+      field-blured-handler={fieldBluredHandler}
+      get-work-object={getWorkObject}
+      url={url}
+    ></c-view>
+  </template>
+</template>

@@ -1,0 +1,15 @@
+<template>
+    <template if:true={isVisible}>
+        <div class="slds-p-bottom_x-small slds-p-top_x-small pointer">
+            <lightning-layout-item class="slds-clearfix">
+                <img 
+                    src={imgUrl}
+                    alt={tooltip}                    
+                    onclick={handleClick}
+                    width={imgWidth}
+                    height={imgHeight}
+                ></img>
+            </lightning-layout-item>
+        </div>
+    </template>
+</template>

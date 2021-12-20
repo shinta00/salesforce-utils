@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata" fqn="PegaLWC">
+    <apiVersion>45.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Create Case</masterLabel>
+    <description>Create a Pega case</description>
+    <targets>
+        <target>lightning__AppPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>          
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__AppPage, lightning__HomePage, lightning__RecordPage, lightningCommunity__Default">
+            <property name="urls" label="DX-API endpoints" description="Pega DX-API endpoints seperated by comma" placeholder="Enter Pega DX-API endpoints seperated by comma" type="String" required="true" default="https://pega-server/prweb/api/v1/"/>
+            <property name="flows" label="Flows" description="Comma separated flow IDs, leave blank to include all flows" placeholder="Comma separated flow IDs, leave blank to include all flows" required="false" type="String"/>
+            <property name="title" label="Title" placeholder="Enter component title" type="String" required="false" default="Create Case"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

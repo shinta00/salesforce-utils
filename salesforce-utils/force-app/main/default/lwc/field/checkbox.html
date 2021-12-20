@@ -1,0 +1,22 @@
+<template>
+  <lightning-layout-item>
+    <div class="slds-p-bottom_x-small slds-p-top_x-small">
+      <template if:true={fieldLabel}>
+        <label class="slds-form-element__label">{fieldLabel}</label>
+      </template>
+      <lightning-input
+        label={label}
+        type="checkbox"
+        value={fieldObject.value}
+        data-reference={fieldObject.reference}
+        disabled={disabled}
+        checked={checked}
+        readonly={readonly}
+        required={required}
+        field-level-help={tooltip}
+        onchange={handleChange}
+      >
+      </lightning-input>
+    </div>
+  </lightning-layout-item>
+</template>

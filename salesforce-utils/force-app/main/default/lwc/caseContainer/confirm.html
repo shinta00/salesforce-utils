@@ -1,0 +1,32 @@
+<template>
+    <template if:true={showSpinner}>
+        <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+    </template>
+	<div class="c-container">
+		<lightning-layout multiple-rows="true">
+                <lightning-layout-item class="slds-float_left slds-var-p-left_small" padding="left-x-large" size="9">
+                    <lightning-progress-indicator current-step={currentStage} type="path" variant="base">
+                        <template for:each={stages} for:item="stage">
+                            <lightning-progress-step onclick={ignoreStepClick}  label={stage.label} value={stage.value} key={stage.value}></lightning-progress-step>
+                        </template>
+                    </lightning-progress-indicator>                        
+                </lightning-layout-item>
+			    <lightning-layout-item padding="around-small" size="12">
+                    <lightning-layout multiple-rows="true">
+                        <lightning-layout-item padding="around-small" size="12">
+                            <lightning-layout multiple-rows="true">
+                                <lightning-layout-item class="slds-clearfix" size="12">
+                                    <c-view></c-view> 
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </lightning-layout-item>
+                <lightning-layout-item class="slds-clearfix" padding="around-small" size="12">
+                    <div class="slds-text-align_center">
+                         <lightning-button label="Close" onclick={handleConfirm} class="slds-var-m-right_x-small"></lightning-button>
+                    </div>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+</template>

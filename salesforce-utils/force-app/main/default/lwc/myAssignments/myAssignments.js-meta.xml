@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata" fqn="PegaLWC">
+    <apiVersion>45.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>My Assignments</masterLabel>
+    <description>Access Pega worklist and workbaskets</description>
+    <targets>
+        <target>lightning__AppPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>          
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__AppPage, lightning__HomePage, lightning__RecordPage, lightningCommunity__Default">
+            <property name="urls" label="DX-API endpoints" description="Pega DX-API endpoints seperated by comma" placeholder="Enter Pega DX-API endpoints seperated by comma" type="String" required="true" default="https://pega-server/prweb/api/v1/"/>
+            <property name="worklistDataPage" description="Datapage for worklist" label="Worklist datapage" placeholder="Enter worklist data page" required="false" type="String" default="D_pyMyWorkList"/>
+            <property name="worklistColumns" description="Default worklist columns" label="Default worklist columns" placeholder="Enter worklist columns" required="false" type="String" default="pxRefObjectInsName, pyAssignmentStatus, pxUrgencyAssign, pyLabel, pxCreateDateTime, pxTaskLabel"/>
+            <property name="workBasketDataPage" description="Datapage for workbasket" label="Workbasket datapage" placeholder="Enter worklist data page" required="false" type="String" default="D_WorkBasket"/>
+            <property name="workBasketColumns" label="Default workbasket columns" description="Default workbasket columns" placeholder="Enter workbasket columns" required="false" type="String" default="pxRefObjectInsName, pyAssignmentStatus, pxUrgencyAssign, pyLabel, pxCreateDateTime, pxTaskLabel"/>
+            <property name="title" label="Title" placeholder="Enter component title" type="String" required="false" default="My Assignments"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

@@ -1,0 +1,14 @@
+<template>
+  <lightning-layout-item>
+    <lightning-radio-group
+      label={label}
+      value={fieldObject.value}
+      data-reference={fieldObject.reference}
+      disabled={disabled}
+      required={required}
+      options={radiogroupOptions}
+      onchange={handleChange}
+    >
+    </lightning-radio-group>
+  </lightning-layout-item>
+</template>

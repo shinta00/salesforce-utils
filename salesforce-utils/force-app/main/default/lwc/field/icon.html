@@ -1,0 +1,16 @@
+<template>
+    <template if:true={isVisible}>
+        <div class="slds-p-bottom_x-small slds-p-top_x-small pointer">
+            <lightning-layout-item class="slds-clearfix">
+                <lightning-icon 
+                    icon-name={iconName} 
+                    alternative-text={tooltip} 
+                    data-reference={fieldObject.reference}
+                    size="small"
+                    onclick={handleClick}
+                ></lightning-icon>
+                <!-- <span class="slds-p-left_x-small">{label}</span> -->
+            </lightning-layout-item>
+        </div>
+    </template>
+</template>

@@ -1,0 +1,54 @@
+<template>
+  <template if:true={groupObject.view}>
+    <template if:true={groupObject.view.visible}>
+      <c-view
+        view-object={groupObject.view}
+        register-component={registerComponent}
+        case-data={caseData}
+        field-changed-handler={fieldChangedHandler}
+        field-clicked-handler={fieldClickedHandler}
+        field-blured-handler={fieldBluredHandler}
+        get-work-object={getWorkObject}
+        url={url}
+      ></c-view>
+    </template>
+  </template>
+  <template if:true={groupObject.layout}>
+    <c-layout
+      layout-object={groupObject.layout}
+      register-component={registerComponent}
+      case-data={caseData}
+      field-changed-handler={fieldChangedHandler}
+      field-clicked-handler={fieldClickedHandler}
+      field-blured-handler={fieldBluredHandler}
+      get-work-object={getWorkObject}
+      url={url}
+    ></c-layout>
+  </template>
+  <template if:true={groupObject.paragraph}>
+    <c-field
+      field-object={groupObject.paragraph}
+      register-component={registerComponent}
+      get-work-object={getWorkObject}
+    ></c-field>
+  </template>
+  <template if:true={groupObject.caption}>
+    <c-field
+      field-object={groupObject.caption}
+      register-component={registerComponent}
+      get-work-object={getWorkObject}
+    ></c-field>
+  </template>
+  <template if:true={groupObject.field}>
+    <c-field
+      field-object={groupObject.field}
+      register-component={registerComponent}
+      case-data={caseData}
+      field-changed-handler={fieldChangedHandler}
+      field-clicked-handler={fieldClickedHandler}
+      field-blured-handler={fieldBluredHandler}
+      get-work-object={getWorkObject}
+      url={url}
+    ></c-field>
+  </template>
+</template>

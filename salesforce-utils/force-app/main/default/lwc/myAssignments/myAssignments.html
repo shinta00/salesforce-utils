@@ -1,0 +1,24 @@
+<template>
+  <lightning-card title={state.title} icon-name={state.icon}>
+    <template if:true={isWorklist}>
+      <c-assignment-list
+        onworkitemselected={handleWorkItemSelected}
+        operator={state.operator}
+        urls={urls}
+        default-worklist-columns={worklistColumns}
+        default-workbasket-columns={workBasketColumns}
+        worklist-data-page={worklistDataPage}
+        work-basket-data-page={workBasketDataPage}
+      ></c-assignment-list>
+    </template>
+    <template if:false={isWorklist}>
+      <c-case-container
+        onworkoblectclosed={handleWorkObjectClosed}
+        onchangetitle={handleChangeTitle}
+        assignment-id={state.assignmentId}
+        case-id={state.caseId}
+        url={state.caseUrl}
+      ></c-case-container>
+    </template>
+  </lightning-card>
+</template>

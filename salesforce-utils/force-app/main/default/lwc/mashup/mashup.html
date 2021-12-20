@@ -1,0 +1,15 @@
+<template>
+  <template if:true={mashupUrl}>
+    <!-- <iframe width="100%" height={mashupHeight} src={mashupUrl}></iframe> -->
+    <iframe
+      lwc:dom="manual"
+      name="PegaGadgetIfr"
+      id="PegaGadgetIfr"
+      data-pega-iframe-gadgetname="PegaGadget"
+      data-pega-resizetype="stretch"
+      style={mashupStyle}
+      src={url}
+    >
+    </iframe>
+  </template>
+</template>

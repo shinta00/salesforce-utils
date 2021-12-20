@@ -1,0 +1,35 @@
+<template>
+    <lightning-layout-item>
+        <div class="slds-p-around_medium lgc-bg">
+            <template if:false={isLoading}>
+                <lightning-input type="file" label="Attachments" onchange={handleChange}></lightning-input>
+            </template>
+            <template if:true={isLoading}>
+                <lightning-input disabled type="file" label="Attachments" onchange={handleChange}></lightning-input>                
+            </template>            
+        </div>
+    </lightning-layout-item>
+
+    <template if:true={showAttachment}>       
+          <lightning-layout>
+            <template for:each={caseAttachments} for:item="attachment" for:index="index">
+              <lightning-layout-item padding="horizontal-small" key={attachment.ID}>
+                <div class="pointer">
+                    <lightning-pill 
+                        label={attachment.name} 
+                        onclick={downloadAttachment}
+                        onremove={removeAttachment}
+                        data-index={index}                    
+                    >
+                        <lightning-icon 
+                            icon-name="utility:attach" 
+                            variant="circle"  
+                            alternative-text={attachment.name}
+                        ></lightning-icon>
+                    </lightning-pill>
+                </div>
+              </lightning-layout-item>
+            </template>
+          </lightning-layout>
+      </template>    
+</template>

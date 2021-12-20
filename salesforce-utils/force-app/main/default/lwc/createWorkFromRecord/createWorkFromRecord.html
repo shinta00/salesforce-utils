@@ -1,0 +1,107 @@
+<template>
+  <template if:true={showSpinner}>
+    <lightning-spinner
+      alternative-text="Loading"
+      size="large"
+    ></lightning-spinner>
+  </template>
+  <lightning-card title={state.title} icon-name={state.icon}>
+    <lightning-layout>
+      <template if:true={msg}>
+        <lightning-layout-item>
+          <p>
+            <lightning-formatted-text value={msg}></lightning-formatted-text>
+          </p>
+        </lightning-layout-item>
+      </template>
+    </lightning-layout>
+
+    <template if:true={state.recordHasCase}>
+      <template if:true={isAssignmentMode}>
+        <c-case-container
+          onworkoblectclosed={handleWorkObjectClosed}
+          onchangetitle={handleChangeTitle}
+          assignment-id={state.assignmentId}
+          case-id={state.caseId}
+          new-harness-view={newHarnessView}
+          case-type={caseType}
+          process-id={processId}
+          url={url}
+        ></c-case-container>
+      </template>
+      <template if:false={isAssignmentMode}>
+        <lightning-layout multiple-rows="true">
+          <lightning-layout-item padding="horizontal-large" size="12">
+            <lightning-layout multiple-rows="true">
+              <lightning-layout-item size="12">
+                <c-view></c-view>
+              </lightning-layout-item>
+            </lightning-layout>
+          </lightning-layout-item>
+        </lightning-layout>
+        <template if:true={state.showAssignmentLink}>
+          <lightning-layout>
+            <lightning-layout-item padding="around-large" size="12">
+              <lightning-button
+                icon-name="utility:record_update"
+                label="Process Assignment"
+                variant="base"
+                onclick={handleAssignmentClick}
+                class="slds-text-heading--small slds-button__icon--large"
+              ></lightning-button>
+            </lightning-layout-item>
+          </lightning-layout>
+        </template>
+      </template>
+    </template>
+    <template if:false={state.recordHasCase}>
+      <template if:true={isCreateWork}>
+        <template if:true={viewOnlyMode}>
+          <lightning-layout>
+            <lightning-layout-item padding="around-large" size="12">
+              <div class="inlinemiddle">
+                <h1>No assignments available for this record.</h1>
+              </div>
+            </lightning-layout-item>
+          </lightning-layout>
+        </template>
+        <template if:false={viewOnlyMode}>
+          <lightning-layout multiple-rows="true">
+            <lightning-layout-item class="inlinemiddle" flexibility="auto">
+              <template
+                for:each={caseTypes}
+                for:item="caseType"
+                for:index="index"
+              >
+                <div class="pointer" key={caseType.name}>
+                  <lightning-avatar
+                    class="slds-m-left_large slds-m-right_large slds-m-bottom_tiny"
+                    fallback-icon-name="utility:new"
+                    size="large"
+                    data-index={index}
+                    data-flow={caseType.name}
+                    onclick={handleClick}
+                  >
+                  </lightning-avatar>
+                  <p class="avatar">{caseType.name}</p>
+                </div>
+              </template>
+            </lightning-layout-item>
+          </lightning-layout>
+        </template>
+      </template>
+      <template if:false={isCreateWork}>
+        <c-case-container
+          onworkoblectclosed={handleWorkObjectClosed}
+          onchangetitle={handleChangeTitle}
+          assignment-id={state.assignmentId}
+          case-id={state.caseId}
+          new-harness-view={newHarnessView}
+          case-type={caseType}
+          process-id={processId}
+          url={url}
+        ></c-case-container>
+      </template>
+    </template>
+  </lightning-card>
+</template>

@@ -1,0 +1,126 @@
+<template>
+  <lightning-layout-item>
+    <div class="slds-var-p-bottom_xx-small slds-var-p-top_xx-small">
+      <template if:false={isFormattedText}>
+        <label class="slds-form-element__label">{label}</label>
+        <div class="slds-form-element__control">
+          <lightning-formatted-text
+            value={fieldObject.value}
+            linkify
+            onclick={handleClick}
+          >
+          </lightning-formatted-text>
+        </div>
+      </template>
+      <template if:true={isFormattedDate}>
+        <label class="slds-form-element__label">{label}</label>
+        <div class="slds-form-element__control">
+          <lightning-formatted-date-time
+            value={fieldObject.value}
+            year="numeric"
+            month={month}
+            day="numeric"
+            onclick={handleClick}
+          >
+          </lightning-formatted-date-time>
+        </div>
+      </template>
+      <template if:true={isFormattedDateTime}>
+        <label class="slds-form-element__label">{label}</label>
+        <div class="slds-form-element__control">
+          <lightning-formatted-date-time
+            value={fieldObject.value}
+            year="numeric"
+            month={month}
+            day="numeric"
+            hour="2-digit"
+            minute="2-digit"
+            onclick={handleClick}
+          >
+          </lightning-formatted-date-time>
+        </div>
+      </template>
+      <template if:true={isFormattedEmail}>
+        <label class="slds-form-element__label">{label}</label>
+        <div class="slds-form-element__control">
+          <lightning-formatted-email
+            value={formattedValue}
+            onclick={handleClick}
+          >
+          </lightning-formatted-email>
+        </div>
+      </template>
+      <template if:true={isFormattedUrl}>
+        <label class="slds-form-element__label">{label}</label>
+        <div class="slds-form-element__control">
+          <lightning-formatted-url
+            value={formattedValue}
+            tooltip={tooltip}
+            target="_blank"
+          >
+          </lightning-formatted-url>
+        </div>
+      </template>
+      <template if:true={isFormattedTel}>
+        <label class="slds-form-element__label">{label}</label>
+        <div class="slds-form-element__control">
+          <lightning-formatted-phone value={formattedValue}>
+          </lightning-formatted-phone>
+        </div>
+      </template>
+      <template if:true={isFormattedNumber}>
+        <label class="slds-form-element__label">{label}</label>
+        <div class="slds-form-element__control">
+          <lightning-formatted-number
+            value={formattedValue}
+            maximum-fraction-digits="3"
+            minimum-fraction-digits="2"
+            onclick={handleClick}
+          >
+          </lightning-formatted-number>
+        </div>
+      </template>
+      <template if:true={isFormattedPercentage}>
+        <label class="slds-form-element__label">{label}</label>
+        <div class="slds-form-element__control">
+            <lightning-formatted-number 
+                value={formattedValue}
+                format-style="percent"      
+                minimum-fraction-digits="2"
+                maximum-fraction-digits="3"              
+                onclick={handleClick}
+            ></lightning-formatted-number>
+        </div>
+      </template>        
+      <template if:true={isFormattedCurrency}>
+        <label class="slds-form-element__label">{label}</label>
+        <div class="slds-form-element__control">
+          <lightning-formatted-number
+            value={formattedValue}
+            format-style="currency"
+            currency-code={currencyCode}
+            currency-display-as="symbol"
+            onclick={handleClick}
+          ></lightning-formatted-number>
+        </div>
+      </template>
+      <template if:true={isFormattedTrueFalse}>
+        <label class="slds-form-element__label">{label}</label>
+        <div class="slds-form-element__control">
+          <lightning-formatted-text
+            value={formattedValue}
+            onclick={handleClick}
+          >
+          </lightning-formatted-text>
+        </div>
+      </template>
+      <template if:true={isFormattedString}>
+        <label class="slds-form-element__label">{label}</label>
+        <div class="slds-form-element__control">
+          <lightning-formatted-text value={formattedValue} linkify>
+          </lightning-formatted-text>
+        </div>
+      </template>
+    </div>
+  </lightning-layout-item>
+</template>

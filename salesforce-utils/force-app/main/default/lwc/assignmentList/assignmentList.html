@@ -1,0 +1,139 @@
+<template>
+  <div class={flexipageRegionWidth}>
+    <c-error-panel
+      has-errors={hasErrors}
+      hide-errors={hideErrors}
+      errors={errors}
+      title-msg={Error}
+      message="Click here to hide this section."
+    ></c-error-panel>
+
+    <lightning-layout multiple-rows="true">
+      <lightning-layout-item
+        class="slds-p-left_medium slds-p-top_large"
+        padding="around-tiny"
+        size="3"
+      >
+        <div onkeyup={handleKeyUp}>
+          <lightning-input
+            name="enter-search"
+            label="Search"
+            placeholder="Search by any column"
+            type="search"
+            onchange={handleSearch}
+          ></lightning-input>
+        </div>
+      </lightning-layout-item>
+
+      <lightning-layout-item
+        padding="around-tiny"
+        class="slds-p-top_large"
+        size="3"
+      >
+        <div class="slds-p-left_medium">
+          <template if:true={showAssignmentSource}>
+            <lightning-combobox
+              name="radioGroup"
+              label="Assignment Source"
+              options={assignmentSource}
+              value={currentAssignmentSource}
+              onchange={handleWorkSourceChange}
+            ></lightning-combobox>
+          </template>
+        </div>
+      </lightning-layout-item>
+
+      <lightning-layout-item
+        class="slds-p-right_medium slds-m-top_xx-large"
+        padding="around-tiny"
+        alignment-bump="left"
+      >
+        <lightning-button-icon
+          class="slds-float_right"
+          icon-name="utility:settings"
+          size="medium"
+          onclick={handleShowSettings}
+          alternative-text="Settings"
+        ></lightning-button-icon>
+
+        <lightning-button-icon
+          class="slds-float_right slds-p-right_x-small"
+          icon-name="utility:refresh"
+          size="medium"
+          onclick={handleRefresh}
+          alternative-text={assignmentsFetchTime}
+        ></lightning-button-icon>
+        <span class="slds-clearfix slds-float_right slds-m-around_x-small"
+          >{assignmentsFetchTime}</span
+        >
+      </lightning-layout-item>
+
+      <lightning-layout-item padding="around-tiny" flexibility="auto">
+        <div class="slds-p-around_medium" style="height:300px;">
+          <lightning-datatable
+            key-field="pxRefObjectInsName"
+            data={assignments}
+            onrowselection={handleRowSelection}
+            sorted-direction={sortDirection}
+            sorted-by={sortedBy}
+            columns={columns}
+            max-row-selection="1"
+            onsort={handleSort}
+            is-loading={tableLoadingState}
+            enable-infinite-loading="true"
+            onloadmore={loadMoreData}
+          ></lightning-datatable>
+        </div>
+      </lightning-layout-item>
+      <lightning-layout-item flexibility="auto" padding="around-tiny">
+        <div class="page-footer page-section"></div>
+      </lightning-layout-item>
+    </lightning-layout>
+  </div>
+  <c-modal header={settingsHeader}>
+    <div>
+      <lightning-combobox
+        name="sortBy"
+        label="Default sort column"
+        value={currentSortColumn}
+        placeholder="Enter initial sort column"
+        options={sortByOptions}
+        onchange={handleSortByColumn}
+      ></lightning-combobox>
+      <lightning-combobox
+        name="sortDirection"
+        label="Default sort direction"
+        value={sortDirection}
+        placeholder="Enter initial sort direction"
+        options={sortDirectionOptions}
+        onchange={handleSortDirection}
+      ></lightning-combobox>
+      <lightning-input
+        name="pageSize"
+        required
+        value={pageSize}
+        type="number"
+        label="Page size"
+        onblur={handlePageSize}
+        placeholder="Enter page size"
+      ></lightning-input>
+      <lightning-dual-listbox
+        name="worklistColumns"
+        label="Default worklist columns"
+        source-label="Available columns"
+        selected-label="Selected columns"
+        required-options={requiredOptions}
+        options={availableWorklistColumnsOptions}
+        value={_worklistColumns}
+        onchange={handleSelectColumnChange}
+      ></lightning-dual-listbox>
+    </div>
+    <div slot="footer">
+      <lightning-button
+        label="Close"
+        variant="brand"
+        onclick={handleCloseSettings}
+      ></lightning-button>
+    </div>
+  </c-modal>
+</template>

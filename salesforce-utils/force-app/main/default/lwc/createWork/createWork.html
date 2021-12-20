@@ -1,0 +1,82 @@
+<template>
+  <template if:true={showSpinner}>
+    <lightning-spinner
+      alternative-text="Loading"
+      size="large"
+    ></lightning-spinner>
+  </template>
+  <lightning-card title={state.title} icon-name={state.icon}>
+    <c-error-panel
+      has-errors={hasErrors}
+      hide-errors={hideErrors}
+      errors={errors}
+      title-msg={Error}
+      message="Click here to hide this section."
+    ></c-error-panel>
+
+    <template if:true={isCreateWork}>
+        <lightning-layout
+          horizontal-align="center"
+          multiple-rows="true"
+          key={keyRow}
+        >
+        <template for:each={rows} for:item="row" for:index="rowIdx">
+            <template for:each={row} for:item="ct" for:index="index">
+              <lightning-layout-item size={colSize} key={keyRow} >
+                <div class="inlinemiddle pointer">
+                  <lightning-avatar
+                    class="slds-m-left_large slds-m-right_large slds-m-bottom_tiny"
+                    fallback-icon-name="utility:new"
+                    size="large"
+                    data-index={index}
+                    data-flow={ct.name}
+                    onclick={handleClick}
+                  >
+                  </lightning-avatar>
+                  <p class="avatar">{ct.name}</p>
+                </div>
+              </lightning-layout-item>
+            </template>
+        </template>
+        </lightning-layout>
+
+        <lightning-layout key={keyRow}>
+          <template for:each={lastRow} for:item="ct" for:index="index">
+            <lightning-layout-item size={colSize} key={key}>
+              <div class="inlinemiddle pointer">
+                <lightning-avatar
+                  class="slds-m-left_large slds-m-right_large slds-m-bottom_tiny"
+                  fallback-icon-name="utility:new"
+                  size="large"
+                  data-index={index}
+                  data-flow={ct.name}
+                  onclick={handleClick}
+                >
+                </lightning-avatar>
+                <p class="avatar">{ct.name}</p>
+              </div>
+            </lightning-layout-item>
+          </template>
+          <lightning-layout-item
+            size={lastColSize}
+            key={key}
+            padding="around-small"
+          >
+          </lightning-layout-item>
+        </lightning-layout>
+    </template>
+
+    <template if:false={isCreateWork}>
+      <c-case-container
+        onworkoblectclosed={handleWorkObjectClosed}
+        onchangetitle={handleChangeTitle}
+        assignment-id={state.assignmentId}
+        case-id={state.caseId}
+        new-harness-view={newHarnessView}
+        case-type={caseType}
+        process-id={processId}
+        url={state.caseUrl}
+      ></c-case-container>
+    </template>
+  </lightning-card>
+</template>

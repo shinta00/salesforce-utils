@@ -1,0 +1,13 @@
+.inlinemiddle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.avatar {
+    text-align: center;
+}
+
+.pointer {
+    cursor: pointer;
+}
